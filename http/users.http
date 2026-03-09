@@ -1,0 +1,16 @@
+@baseUrl=localhost:3000
+
+### load all users
+GET {{baseUrl}}/users
+###
+
+### Creates a new user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "login": "j.doe",
+  "firstName": "J.",
+  "lastName": "DOE"
+}
+###

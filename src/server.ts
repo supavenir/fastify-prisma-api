@@ -1,7 +1,22 @@
 import Fastify from "fastify"
 import { prisma } from "./prisma"
+import {Boolean} from "./generated/prisma/internal/prismaNamespace";
+import {User} from "./generated/prisma/client";
 
 const app = Fastify({ logger: true })
+
+app.get("/users", (req, res) => {
+    return prisma.user.findMany()
+})
+
+app.post("/users", async (req, res) => {
+    const {login, firstName, lastName} = req.body as any
+    const user = await prisma.user.create({
+        data: {login, firstName, lastName},
+    })
+    res.code(201)
+    return user
+})
 
 app.get("/posts", async () => {
     return prisma.post.findMany()
@@ -9,6 +24,7 @@ app.get("/posts", async () => {
 
 app.get("/posts/:id", async (req, res) => {
     const { id } = req.params as any
+
 
     const post = await prisma.post.findUnique({
         where: { id: Number(id) }
@@ -54,14 +70,14 @@ app.delete("/posts/:id", async (req, res) => {
     }
 })
 
-app.post("/posts", async (request, reply) => {
-    const { title, content } = request.body as any
+app.post("/posts", async (request, res) => {
+    const { title, content, authorId } = request.body as any
 
     const post = await prisma.post.create({
-        data: { title, content }
+        data: { title, content, authorId },
     })
 
-    reply.code(201)
+    res.code(201)
     return post
 })
 

@@ -9,7 +9,8 @@ POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-  "title": "My First Post",
-  "content": "This is the content of my first post."
+  "title": "My second Post",
+  "content": "This is the content of my second post.",
+  "authorId": 5
 }
 ###

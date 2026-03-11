@@ -4,8 +4,15 @@ async function create(data: {
     login: string,
     firstName:string,
     lastName: string,
+    email: string,
 }) {
     return prisma.user.create({ data})
+}
+
+async function getOne(id: number) {
+    return prisma.user.findUnique({
+        where: { id }
+    })
 }
 
 async function getAll() {
@@ -13,5 +20,5 @@ async function getAll() {
 }
 
 export const userService={
-    create,getAll
+    create,getAll,getOne
 }

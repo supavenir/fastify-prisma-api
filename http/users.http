@@ -4,6 +4,10 @@
 GET {{baseUrl}}/users
 ###
 
+### get one user
+GET {{baseUrl}}/users/1
+###
+
 ### Creates a new user
 POST {{baseUrl}}/users
 Content-Type: application/json
@@ -11,6 +15,7 @@ Content-Type: application/json
 {
   "login": "j.doe",
   "firstName": "J.",
-  "lastName": "DOE"
+  "lastName": "DOE",
+  "email": "123"
 }
 ###
